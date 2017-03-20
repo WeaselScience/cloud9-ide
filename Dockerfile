@@ -9,8 +9,7 @@ RUN apt-get install -y git curl wget
 # Install nvm
 RUN apt-get install -y build-essential
 RUN wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.1/install.sh | bash
-RUN export NVM_DIR="$HOME/.nvm"
-RUN [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+RUN source ~/.bashrc
 
 # Install and setup a sensible version of node, and install a version to run cloud9 with
 RUN nvm install 7
