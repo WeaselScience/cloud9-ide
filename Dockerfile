@@ -16,6 +16,7 @@ RUN /root/.nvm/nvm.sh install 0.12
 RUN /root/.nvm/nvm.sh alias default 7
 
 # Install cloud9
+RUN apt-get install -y python2.7
 RUN git clone git://github.com/c9/core.git /c9sdk && /c9sdk/scripts/install-sdk.sh
 
 # Create workspace directory
