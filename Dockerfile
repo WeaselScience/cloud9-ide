@@ -11,7 +11,7 @@ RUN apt-get install -y build-essential
 RUN wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.1/install.sh | bash
 
 # Install and setup a sensible version of node, and install a version to run cloud9 with
-RUN bash -c "source /root/.nvm/nvm.sh" && nvm install 7 && nvm install 0.12 && nvm alias default 7
+RUN bash /root/.nvm/nvm.sh && nvm install 7 && nvm install 0.12 && nvm alias default 7
 
 # Install cloud9
 RUN git clone git://github.com/c9/core.git /c9sdk && /c9sdk/scripts/install-sdk.sh
