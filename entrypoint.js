@@ -1,9 +1,6 @@
 const spawn = require('child_process').spawn;
 
-const ide = spawn('nvm', [
-    'exec',
-    '0.12',
-    'node',
+const ide = spawn('node', [
     '/c9ide/server.js',
     '-w',
     '/workspace',
