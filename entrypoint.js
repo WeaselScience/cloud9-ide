@@ -6,7 +6,7 @@ const ide = spawn('nvm', [
     'node',
     '/c9ide/server.js',
     '-w',
-    '/root/workspace',
+    '/workspace',
     '--port',
     8080,
     '--listen',
