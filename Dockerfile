@@ -1,5 +1,7 @@
 FROM ubuntu:16.04
 
+COPY ./entrypoint.js /entrypoint.js
+
 # Make sure the OS is up to date
 RUN apt-get update && apt-get upgrade -y
 
@@ -24,4 +26,4 @@ RUN git clone git://github.com/c9/core.git /c9sdk && /c9sdk/scripts/install-sdk.
 RUN mkdir /workspace
 
 # Run the entry script
-ENTRYPOINT node entrypoint.js
+ENTRYPOINT bash -c "source /root/.nvm/nvm.sh && node /entrypoint.js"
