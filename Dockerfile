@@ -26,4 +26,4 @@ RUN mkdir /workspace
 EXPOSE 8080
 
 # Run the entry script
-ENTRYPOINT bash -c "source /root/.nvm/nvm.sh && nvm exec 0.12 node /c9sdk/server.js -w /workspace --port 8080 --packed --collab"
+ENTRYPOINT bash -c "source /root/.nvm/nvm.sh && nvm exec 0.12 node /c9sdk/server.js -w /workspace --port 8080 --packed --collab --listen 0.0.0.0 -a :"
