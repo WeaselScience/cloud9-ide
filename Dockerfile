@@ -24,4 +24,4 @@ RUN git clone git://github.com/c9/core.git /c9sdk && /c9sdk/scripts/install-sdk.
 RUN mkdir /workspace
 
 # Run the entry script
-ENTRYPOINT bash -c "source /root/.nvm/nvm.sh && nvm exec 0.12 node /c9ide/server.js -w /workspace --port 8080 --packed --collab"
+ENTRYPOINT bash -c "source /root/.nvm/nvm.sh && nvm exec 0.12 node /c9sdk/server.js -w /workspace --port 8080 --packed --collab"
