@@ -7,3 +7,5 @@ The ide runs on port 8080.
 The container comes preinstalled with [nvm](https://github.com/creationix/nvm), which allows to easily adjust the version of nodejs when developing. By default, node ^7.0.0 is installed.
 
 The environment is run as root, so the user in cloud9 will also be root.
+
+The workspace directory is `/root/workspace`, so to persist information mount a docker volume there.
