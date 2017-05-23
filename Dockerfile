@@ -31,6 +31,10 @@ RUN echo 'export PS1="\${debian_chroot:+(\$debian_chroot)}\[\033[01;32m\]\u@\h\[
 # Install nvm - to be used by the end user if they need to fine tune their node version, since nvm will overwrite the nodejs version in interactive shell.
 RUN wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.1/install.sh | bash
 
+# Preinstall an nvm version of node, since it allows installation of global npm dependencies without sudo.
+RUN bash -c "source /root/.nvm/nvm.sh && nvm install 7"
+RUN bash -c "source /root/.nvm/nvm.sh && nvm alias default 7"
+
 # Create workspace directory
 RUN mkdir /home/ubuntu/workspace
 
