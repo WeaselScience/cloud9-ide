@@ -32,8 +32,8 @@ RUN echo 'export PS1="\${debian_chroot:+(\$debian_chroot)}\[\033[01;32m\]\u@\h\[
 RUN wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.1/install.sh | bash
 
 # Preinstall an nvm version of node, since it allows installation of global npm dependencies without sudo.
-RUN bash -c "source /root/.nvm/nvm.sh && nvm install 7"
-RUN bash -c "source /root/.nvm/nvm.sh && nvm alias default 7"
+RUN bash -c "source /home/ubuntu/.nvm/nvm.sh && nvm install 7"
+RUN bash -c "source /home/ubuntu/.nvm/nvm.sh && nvm alias default 7"
 
 # Create workspace directory
 RUN mkdir /home/ubuntu/workspace
