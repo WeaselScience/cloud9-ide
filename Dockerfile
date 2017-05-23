@@ -4,31 +4,41 @@ FROM ubuntu:16.04
 RUN apt-get update && apt-get upgrade -y
 
 # Install most basic of things
-RUN apt-get install -y build-essential git curl wget
+RUN apt-get install -y build-essential git curl wget python2.7 sudo nano
+
+# Create the non-root ubuntu user
+RUN adduser --disabled-password --gecos "" ubuntu
+
+# Allow passwordless sudo for ubuntu
+COPY ./ubuntu.nopasswd /etc/sudoers.d/ubuntu.nopasswd
+
+# Install nodejs globally
+RUN curl -sL https://deb.nodesource.com/setup_7.x | bash -
+RUN apt-get install -y nodejs
+
+# Switch to the non-root user
+USER ubuntu
+
+# Install cloud9
+RUN git clone git://github.com/c9/core.git /home/ubuntu/.c9sdk && /home/ubuntu/.c9sdk/scripts/install-sdk.sh
+
+# Install git-aware-prompt
+RUN mkdir ~/.bash && cd ~/.bash && git clone git://github.com/jimeh/git-aware-prompt.git
+RUN echo 'export GITAWAREPROMPT=~/.bash/git-aware-prompt' >> ~/.bashrc
+RUN echo 'source "${GITAWAREPROMPT}/main.sh"' >> ~/.bashrc
+RUN echo 'export PS1="\${debian_chroot:+(\$debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\] \[$txtcyn\]\$git_branch\[$txtred\]\$git_dirty\[$txtrst\]\$ "' >> ~/.bashrc
 
 # Install nvm - to be used by the end user if they need to fine tune their node version, since nvm will overwrite the nodejs version in interactive shell.
 RUN wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.1/install.sh | bash
 
-# Install and setup a sensible version of node for the end-user, using nvm
-RUN bash -c "source /root/.nvm/nvm.sh && nvm install 7"
-RUN bash -c "source /root/.nvm/nvm.sh && nvm alias default 7"
-
-# Install nodejs globally for cloud9
-RUN curl -sL https://deb.nodesource.com/setup_7.x | bash -
-RUN apt-get install -y nodejs
-
-# Install cloud9
-RUN apt-get install -y python2.7
-RUN git clone git://github.com/c9/core.git /c9sdk && /c9sdk/scripts/install-sdk.sh
-
 # Create workspace directory
-RUN mkdir /root/workspace
+RUN mkdir /home/ubuntu/workspace
 
 # Copy the readme to workspace root
-COPY ./README.md /root/workspace/README.md
+COPY ./README-new-workspace.md /home/ubuntu/workspace/README.md
 
 EXPOSE 8080
 
 # Run the entry script
-ENTRYPOINT ["node", "/c9sdk/server.js"]
-CMD ["-w", "/root/workspace", "--port", "8080", "--packed", "--collab", "--listen", "0.0.0.0", "-a", ":"]
+ENTRYPOINT ["node", "/home/ubuntu/.c9sdk/server.js"]
+CMD ["-w", "/home/ubuntu/workspace", "--port", "8080", "--packed", "--collab", "--listen", "0.0.0.0", "-a", ":"]
