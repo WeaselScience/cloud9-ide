@@ -10,7 +10,7 @@ RUN apt-get install -y build-essential git curl wget python2.7 sudo nano
 RUN adduser --disabled-password --gecos "" ubuntu
 
 # Allow passwordless sudo for ubuntu
-COPY ./ubuntu.nopasswd /etc/sudoers.d/ubuntu.nopasswd
+RUN echo 'ubuntu ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
 # Install nodejs globally
 RUN curl -sL https://deb.nodesource.com/setup_7.x | bash -
