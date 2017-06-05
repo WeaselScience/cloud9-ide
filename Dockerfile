@@ -4,7 +4,7 @@ FROM ubuntu:16.04
 RUN apt-get update && apt-get upgrade -y
 
 # Install most basic of things
-RUN apt-get install -y build-essential git curl wget python2.7 sudo nano whiptail
+RUN apt-get install -y build-essential git curl wget python2.7 python sudo nano whiptail
 
 # Create the non-root ubuntu user
 RUN adduser --disabled-password --gecos "" ubuntu
