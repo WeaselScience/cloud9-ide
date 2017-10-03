@@ -34,8 +34,6 @@ COPY ./README-new-workspace.md /root/workspace/README.md
 
 EXPOSE 8080
 
-VOLUME /root
-
 # Run the entry script
 ENTRYPOINT ["node", "/root/.c9sdk/server.js"]
 CMD ["-w", "/root/workspace", "--port", "8080", "--packed", "--collab", "--listen", "0.0.0.0", "-a", ":"]
